@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game_events.tres" type="Resource" id=1]
-[ext_resource path="res://Cars/Car.gd" type="Script" id=2]
+[ext_resource path="res://Levels/house_v1.png" type="Texture" id=2]
 [ext_resource path="res://Cars/Car.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Levels/EndZone.gd" type="Script" id=4]
 [ext_resource path="res://RaceCamera.gd" type="Script" id=5]
@@ -30,7 +30,6 @@ shape = SubResource( 2 )
 
 [node name="Car" parent="." instance=ExtResource( 3 )]
 position = Vector2( 941, 540 )
-script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Car"]
 current = true
@@ -53,3 +52,19 @@ shape = SubResource( 1 )
 [node name="Path2D" type="Path2D" parent="Scenery"]
 curve = SubResource( 3 )
 script = ExtResource( 6 )
+
+[node name="HouseV1" type="Sprite" parent="."]
+position = Vector2( 1714, -167 )
+texture = ExtResource( 2 )
+
+[node name="HouseV2" type="Sprite" parent="."]
+position = Vector2( 1714, -167 )
+texture = ExtResource( 2 )
+
+[node name="HouseV3" type="Sprite" parent="."]
+position = Vector2( 3337, -177 )
+texture = ExtResource( 2 )
+
+[node name="HouseV4" type="Sprite" parent="."]
+position = Vector2( 2514, -185 )
+texture = ExtResource( 2 )

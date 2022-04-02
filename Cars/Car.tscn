@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Cars/Car.gd" type="Script" id=1]
 [ext_resource path="res://game_state.tres" type="Resource" id=2]
 [ext_resource path="res://game_events.tres" type="Resource" id=3]
+[ext_resource path="res://Cars/skully_v1_export.png" type="Texture" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -20,3 +21,7 @@ position = Vector2( -1, -2 )
 rotation = 1.5708
 color = Color( 0.168627, 0.972549, 0, 1 )
 polygon = PoolVector2Array( -9, -21, 12, -20, 13, 16, -10, 17 )
+
+[node name="SkullyV1Export" type="Sprite" parent="."]
+rotation = 4.71239
+texture = ExtResource( 4 )
