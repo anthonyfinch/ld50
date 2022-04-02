@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Cars/Car.tscn" type="PackedScene" id=1]
 [ext_resource path="res://RaceCamera.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Levels/Race.gd" type="Script" id=7]
 [ext_resource path="res://game_events.tres" type="Resource" id=8]
 [ext_resource path="res://game_state.tres" type="Resource" id=9]
+[ext_resource path="res://UI/LabelSmall.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 27.5, 10 )
@@ -32,6 +33,8 @@ __meta__ = {
 
 [node name="Viewport" type="Viewport" parent="ViewportContainer"]
 size = Vector2( 1920, 1280 )
+handle_input_locally = false
+render_target_update_mode = 3
 
 [node name="Car" parent="ViewportContainer/Viewport" instance=ExtResource( 1 )]
 position = Vector2( 941, 540 )
@@ -61,20 +64,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="UIOverlay"]
+[node name="PauseScreen" type="CenterContainer" parent="UIOverlay"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="UIOverlay/CenterContainer"]
-margin_left = 338.0
-margin_top = 300.0
-margin_right = 1582.0
-margin_bottom = 780.0
+[node name="PanelContainer" type="PanelContainer" parent="UIOverlay/PauseScreen"]
+margin_left = 953.0
+margin_top = 533.0
+margin_right = 967.0
+margin_bottom = 547.0
 
-[node name="MarginContainer" type="MarginContainer" parent="UIOverlay/CenterContainer/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="UIOverlay/PauseScreen/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 1237.0
@@ -84,32 +88,59 @@ custom_constants/margin_top = 50
 custom_constants/margin_left = 50
 custom_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UIOverlay/CenterContainer/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIOverlay/PauseScreen/PanelContainer/MarginContainer"]
 margin_left = 50.0
 margin_top = 50.0
 margin_right = 1180.0
 margin_bottom = 416.0
 
-[node name="Label" parent="UIOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Label" parent="UIOverlay/PauseScreen/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
 margin_left = 0.0
 margin_top = 0.0
 margin_right = 1130.0
 margin_bottom = 106.0
 text = "Pause"
 
-[node name="Settings" parent="UIOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
+[node name="Settings" parent="UIOverlay/PauseScreen/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 4 )]
 margin_top = 110.0
 margin_right = 1130.0
 margin_bottom = 230.0
 rect_min_size = Vector2( 1130, 120 )
 
-[node name="Instructions" parent="UIOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
+[node name="Instructions" parent="UIOverlay/PauseScreen/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 234.0
 margin_right = 1130.0
 margin_bottom = 298.0
 text = "End Race?"
 
-[node name="Instructions2" parent="UIOverlay/CenterContainer/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
+[node name="Instructions2" parent="UIOverlay/PauseScreen/PanelContainer/MarginContainer/VBoxContainer" instance=ExtResource( 6 )]
 margin_top = 302.0
 margin_right = 1130.0
 margin_bottom = 366.0
+
+[node name="StartScreen" type="CenterContainer" parent="UIOverlay"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box" type="VBoxContainer" parent="UIOverlay/StartScreen"]
+margin_left = 660.0
+margin_top = 456.0
+margin_right = 1260.0
+margin_bottom = 624.0
+
+[node name="Label" parent="UIOverlay/StartScreen/Box" instance=ExtResource( 3 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 600.0
+margin_bottom = 106.0
+text = "Level Name"
+
+[node name="CountDown" parent="UIOverlay/StartScreen/Box" instance=ExtResource( 10 )]
+margin_left = 0.0
+margin_top = 110.0
+margin_right = 600.0
+margin_bottom = 168.0
+text = "3"

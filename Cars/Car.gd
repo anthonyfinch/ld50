@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 export(Resource) var game_state
+export(Resource) var game_events
 
 var wheel_base = 40
 var steering_angle = 10
@@ -15,15 +16,26 @@ var traction_slow = 0.7
 
 var acceleration = Vector2.ZERO
 var velocity = Vector2.ZERO
-var steer_direction
+var steer_direction = 0.0
 
+var _active = false
 var _paused = false
 
 
 func _ready():
 	assert(game_state != null, "Please set game state resource")
+	assert(game_events != null, "Please set game events resource")
 	_update_paused()
 	game_state.connect("updated_paused", self, "_update_paused")
+	game_events.connect("start_race", self, "_start_race")
+
+
+func _start_race():
+	_active = true
+
+
+func end_race():
+	_active = false
 
 
 func _update_paused():
@@ -45,16 +57,17 @@ func move(delta):
 
 
 func get_input():
-	var turn = 0
-	if Input.is_action_pressed("left"):
-		turn -= 1
-	if Input.is_action_pressed("right"):
-		turn += 1
-	steer_direction = turn * deg2rad(steering_angle)
-	if Input.is_action_pressed("accelerate"):
-		acceleration = transform.x * engine_power
-	if Input.is_action_pressed("brake"):
-		acceleration = transform.x * braking
+	if _active:
+		var turn = 0
+		if Input.is_action_pressed("left"):
+			turn -= 1
+		if Input.is_action_pressed("right"):
+			turn += 1
+		steer_direction = turn * deg2rad(steering_angle)
+		if Input.is_action_pressed("accelerate"):
+			acceleration = transform.x * engine_power
+		if Input.is_action_pressed("brake"):
+			acceleration = transform.x * braking
 
 
 func calculate_steering(delta):
