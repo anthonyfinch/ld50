@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/LabelBig.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/KenneyBold24.tres" type="DynamicFont" id=2]
+[ext_resource path="res://UI/Button.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Title.gd" type="Script" id=4]
+
+[node name="Title" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0156863, 0.027451, 0.12549, 1 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="CenterContainer" parent="VBoxContainer"]
+margin_right = 1920.0
+margin_bottom = 726.0
+size_flags_vertical = 3
+
+[node name="Label" parent="VBoxContainer/Title" instance=ExtResource( 1 )]
+margin_left = 784.0
+margin_top = 310.0
+margin_right = 1136.0
+margin_bottom = 416.0
+text = "LD50!!!"
+
+[node name="VersionLabel" parent="VBoxContainer" instance=ExtResource( 1 )]
+margin_left = 0.0
+margin_top = 730.0
+margin_right = 1920.0
+margin_bottom = 776.0
+custom_fonts/font = ExtResource( 2 )
+text = "VERSION: "
+
+[node name="Buttons" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 780.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 0, 300 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Buttons"]
+margin_left = 532.0
+margin_top = 118.0
+margin_right = 1388.0
+margin_bottom = 182.0
+custom_constants/separation = 50
+alignment = 1
+
+[node name="Instructions" parent="VBoxContainer/Buttons/HBoxContainer" instance=ExtResource( 3 )]
+scene_name = "Instructions"
+
+[node name="Settings" parent="VBoxContainer/Buttons/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 414.0
+margin_right = 666.0
+text = "Settings"
+scene_name = "Settings"
+
+[node name="Play" parent="VBoxContainer/Buttons/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 716.0
+margin_right = 856.0
+text = "Play"
+scene_name = "Race"
