@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/KenneyBold24.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/audio_hint.wav" type="AudioStream" id=2]
+[ext_resource path="res://game_events.tres" type="Resource" id=3]
+[ext_resource path="res://UI/AudioSettingsSlider.gd" type="Script" id=4]
+[ext_resource path="res://UI/AudioSettingsSlider.gd" type="Script" id=5]
 
 [node name="Settings" type="Control"]
 margin_right = 1156.0
@@ -37,6 +41,10 @@ margin_bottom = 46.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 1
+script = ExtResource( 4 )
+game_events = ExtResource( 3 )
+bus_name = "Music"
+audio_hint = ExtResource( 2 )
 
 [node name="SFX" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 52.0
@@ -56,3 +64,7 @@ margin_bottom = 46.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 1
+script = ExtResource( 5 )
+game_events = ExtResource( 3 )
+bus_name = "SFX"
+audio_hint = ExtResource( 2 )
