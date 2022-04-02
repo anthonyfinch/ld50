@@ -1,0 +1,175 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://Levels/rock_edge.png" type="Texture" id=1]
+[ext_resource path="res://addons/rmsmartshape/shapes/point_array.gd" type="Script" id=2]
+[ext_resource path="res://addons/rmsmartshape/shapes/point.gd" type="Script" id=3]
+[ext_resource path="res://addons/rmsmartshape/vertex_properties.gd" type="Script" id=4]
+[ext_resource path="res://addons/rmsmartshape/materials/shape_material.gd" type="Script" id=5]
+[ext_resource path="res://addons/rmsmartshape/shapes/shape_closed.gd" type="Script" id=6]
+[ext_resource path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" type="Script" id=7]
+[ext_resource path="res://addons/rmsmartshape/normal_range.gd" type="Script" id=8]
+[ext_resource path="res://addons/rmsmartshape/materials/edge_material.gd" type="Script" id=9]
+[ext_resource path="res://Levels/rock_v1.png" type="Texture" id=10]
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 4 )
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+position = Vector2( 417.579, 69.9873 )
+point_in = Vector2( -163.74, 51.6139 )
+point_out = Vector2( 163.74, -51.6139 )
+properties = SubResource( 6 )
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 3 )
+position = Vector2( 1024.49, 27.2725 )
+point_in = Vector2( 0, 0 )
+point_out = Vector2( 0, 0 )
+properties = SubResource( 8 )
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 4 )
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 3 )
+position = Vector2( 1738.18, 262.204 )
+point_in = Vector2( -30.2563, -373.755 )
+point_out = Vector2( 30.2563, 373.755 )
+properties = SubResource( 10 )
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 4 )
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 3 )
+position = Vector2( 417.579, 69.9873 )
+point_in = Vector2( -163.74, 51.6139 )
+point_out = Vector2( 163.74, -51.6139 )
+properties = SubResource( 12 )
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 4 )
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 3 )
+position = Vector2( 1054.74, 883.349 )
+point_in = Vector2( 172.639, -37.3755 )
+point_out = Vector2( -172.639, 37.3755 )
+properties = SubResource( 14 )
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 4 )
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 3 )
+position = Vector2( 435.377, 598.584 )
+point_in = Vector2( 0, 0 )
+point_out = Vector2( 0, 0 )
+properties = SubResource( 16 )
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 4 )
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+position = Vector2( -385.104, 445.522 )
+point_in = Vector2( -87.2095, 831.16 )
+point_out = Vector2( -16.0181, -199.336 )
+properties = SubResource( 18 )
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 2 )
+_points = {
+0: SubResource( 7 ),
+1: SubResource( 9 ),
+2: SubResource( 11 ),
+3: SubResource( 13 ),
+4: SubResource( 15 ),
+5: SubResource( 17 ),
+6: SubResource( 19 )
+}
+_point_order = [ 0, 1, 2, 4, 5, 6, 3 ]
+_constraints = {
+[ 0, 3 ]: 15
+}
+_next_key = 4
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 9 )
+textures = [ ExtResource( 1 ) ]
+texture_normals = [  ]
+textures_corner_outer = [  ]
+textures_corner_inner = [  ]
+texture_normals_corner_outer = [  ]
+texture_normals_corner_inner = [  ]
+textures_taper_left = [  ]
+textures_taper_right = [  ]
+texture_normals_taper_left = [  ]
+texture_normals_taper_right = [  ]
+use_corner_texture = true
+use_taper_texture = true
+fit_mode = 0
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 8 )
+begin = 0.0
+distance = 0.0
+edgeRendering = Vector2( 0, 0 )
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 7 )
+edge_material = SubResource( 2 )
+normal_range = SubResource( 3 )
+weld = true
+render = true
+z_index = 0
+z_as_relative = true
+offset = 0.0
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 5 )
+_edge_meta_materials = [ SubResource( 4 ) ]
+fill_textures = [ ExtResource( 10 ) ]
+fill_texture_normals = [  ]
+fill_texture_z_index = -10
+fill_mesh_offset = 0.0
+render_offset = 0.0
+
+[node name="SS2D_Shape_Closed" type="Node2D"]
+script = ExtResource( 6 )
+_points = SubResource( 20 )
+material_overrides = {
+}
+shape_material = SubResource( 5 )
+tessellation_stages = 5
+tessellation_tolerence = 4.0
+flip_edges = false
+render_edges = true
+collision_size = 32.0
+collision_offset = 0.0
+collision_polygon_node_path = NodePath("")
