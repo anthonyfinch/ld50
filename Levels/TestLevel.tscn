@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://game_events.tres" type="Resource" id=1]
+[ext_resource path="res://Cars/Car.gd" type="Script" id=2]
+[ext_resource path="res://Cars/Car.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Levels/EndZone.gd" type="Script" id=4]
+[ext_resource path="res://RaceCamera.gd" type="Script" id=5]
+[ext_resource path="res://Levels/Road.gd" type="Script" id=6]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 100.0
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 300, 100 )
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 490, 569, 0, 0, 0, 0, 1193, 558, 0, 0, 0, 0, 1814, 548, 0, 0, 0, 0, 3347, 589, 0, 0, 0, 0, 6384, 530, 0, 0, 0, 0, 7666, 850, 0, 0, 0, 0, 8798, 537, 0, 0, 0, 0, 10038, 507 )
+}
+
+[node name="TestLevel" type="Node2D"]
+
+[node name="EndZone" type="Area2D" parent="."]
+position = Vector2( 10104, 508 )
+script = ExtResource( 4 )
+game_events = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndZone"]
+shape = SubResource( 2 )
+
+[node name="Car" parent="." instance=ExtResource( 3 )]
+position = Vector2( 941, 540 )
+script = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="Car"]
+current = true
+script = ExtResource( 5 )
+zoom_factor = 450
+
+[node name="Scenery" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Scenery"]
+position = Vector2( 7631, 589 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Scenery/StaticBody2D"]
+color = Color( 0.862745, 0.207843, 0.207843, 1 )
+polygon = PoolVector2Array( -281, -100, 320, -99, 319, 98, -286, 100 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Scenery/StaticBody2D"]
+position = Vector2( 18, 0 )
+shape = SubResource( 1 )
+
+[node name="Path2D" type="Path2D" parent="Scenery"]
+curve = SubResource( 3 )
+script = ExtResource( 6 )

@@ -6,6 +6,8 @@ export(Resource) var game_state
 onready var _pause_screen = $UIOverlay/PauseScreen
 onready var _start_screen = $UIOverlay/StartScreen
 onready var _countdown_label = $UIOverlay/StartScreen/Box/CountDown
+onready var _end_screen = $UIOverlay/EndScreen
+onready var _end_screen_time = $UIOverlay/EndScreen/Box/EndTime
 onready var _race_time_label = $UIOverlay/RaceTime
 
 var _started = false
@@ -19,8 +21,15 @@ func _ready():
 	assert(game_state != null, "Please set game state resource")
 
 	_start_screen.visible = true
+	_end_screen.visible = false
 	_update_ui()
 	game_events.connect("unpause", self, "_unpause")
+	game_events.connect("car_finished", self, "_end_race")
+
+
+func _end_race(_who):
+	_finished = true
+	_end_screen.visible = true
 
 
 func _process(delta):
@@ -36,6 +45,7 @@ func _process(delta):
 	elif not _finished and not game_state.paused:
 		_race_time += delta
 		_race_time_label.text = "%3.2f" % _race_time
+		_end_screen_time.text = "%3.3f" % _race_time
 
 
 func _update_ui():
