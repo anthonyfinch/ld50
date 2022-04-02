@@ -5,8 +5,8 @@ export(Resource) var game_events
 
 var wheel_base = 40
 var steering_angle = 10
-var engine_power = 800
-var friction = -0.9
+var engine_power = 3600
+var friction = -0.5
 var drag = -0.001
 var braking = -450
 var max_speed_reverse = 250
