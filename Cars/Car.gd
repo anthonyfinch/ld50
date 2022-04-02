@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+export(Resource) var game_state
+
 var wheel_base = 40
 var steering_angle = 10
 var engine_power = 800
@@ -15,17 +17,26 @@ var acceleration = Vector2.ZERO
 var velocity = Vector2.ZERO
 var steer_direction
 
+var _paused = false
+
 
 func _ready():
-	pass
+	assert(game_state != null, "Please set game state resource")
+	_update_paused()
+	game_state.connect("updated_paused", self, "_update_paused")
+
+
+func _update_paused():
+	_paused = game_state.paused
 
 
 func _physics_process(delta):
-	acceleration = Vector2.ZERO
-	get_input()
-	apply_friction()
-	calculate_steering(delta)
-	move(delta)
+	if not _paused:
+		acceleration = Vector2.ZERO
+		get_input()
+		apply_friction()
+		calculate_steering(delta)
+		move(delta)
 
 
 func move(delta):

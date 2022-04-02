@@ -13,9 +13,15 @@ _global_script_classes=[ {
 "class": "GameEvents",
 "language": "GDScript",
 "path": "res://GameEvents.gd"
+}, {
+"base": "Resource",
+"class": "GameState",
+"language": "GDScript",
+"path": "res://GameState.gd"
 } ]
 _global_script_class_icons={
-"GameEvents": ""
+"GameEvents": "",
+"GameState": ""
 }
 
 [application]
