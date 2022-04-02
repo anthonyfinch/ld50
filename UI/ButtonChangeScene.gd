@@ -9,5 +9,5 @@ func _ready() -> void:
 
 
 func _goto_scene() -> void:
-	game_events.emit_signal("change_scene", scene_name)
+	game_events.change_scene(scene_name)
 
