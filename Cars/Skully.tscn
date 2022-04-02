@@ -14,11 +14,12 @@ script = ExtResource( 1 )
 game_state = ExtResource( 2 )
 game_events = ExtResource( 3 )
 
-[node name="SkullyV1Export" type="Sprite" parent="."]
-rotation = 4.71239
-texture = ExtResource( 4 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -38, 0 )
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="SkullyV1Export" type="Sprite" parent="CollisionShape2D"]
+position = Vector2( -0.00013756, -38 )
+rotation = 3.14159
+texture = ExtResource( 4 )

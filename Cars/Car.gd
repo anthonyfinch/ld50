@@ -1,7 +1,13 @@
 extends KinematicBody2D
 
+enum Modes {
+	PlayerControlled
+	Baddy
+	}
+
 export(Resource) var game_state
 export(Resource) var game_events
+export(Modes) var mode = Modes.PlayerControlled
 
 var wheel_base = 40
 var steering_angle = 10
@@ -44,12 +50,37 @@ func _update_paused():
 
 func _physics_process(delta):
 	if not _paused:
-		acceleration = Vector2.ZERO
-		get_input()
+		match mode:
+			Modes.PlayerControlled:
+				_player_mode()
+			Modes.Baddy:
+				_baddy_mode(delta)
+
 		apply_friction()
 		calculate_steering(delta)
 		move(delta)
 
+
+
+func _baddy_mode(delta):
+	acceleration = Vector2.ZERO
+	if _active:
+		var road = game_state.road
+		var path = road.curve
+		
+		var predicted = position + velocity * delta
+		var offset = path.get_closest_offset(road.to_local(predicted))
+
+		var target = road.to_global(path.interpolate_baked(offset + 1.0))
+
+		var acc = (target - global_position).normalized()
+	
+		acceleration = acc * engine_power
+
+
+func _player_mode():
+	acceleration = Vector2.ZERO
+	get_input()
 
 func move(delta):
 	velocity += acceleration * delta

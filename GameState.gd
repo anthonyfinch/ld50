@@ -4,6 +4,7 @@ class_name GameState
 signal updated_paused
 
 var paused = false setget set_paused,get_paused
+var road
 
 
 func set_paused(val):
