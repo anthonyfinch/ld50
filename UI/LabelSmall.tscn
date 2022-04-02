@@ -5,8 +5,8 @@
 [node name="Label" type="Label"]
 margin_left = 832.0
 margin_top = 335.0
-margin_right = 1088.0
-margin_bottom = 441.0
+margin_right = 960.0
+margin_bottom = 393.0
 custom_fonts/font = ExtResource( 1 )
 text = "GAME"
 align = 1

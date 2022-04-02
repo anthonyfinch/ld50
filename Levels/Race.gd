@@ -6,8 +6,8 @@ export(Resource) var game_state
 onready var _pause_screen = $UIOverlay/PauseScreen
 onready var _start_screen = $UIOverlay/StartScreen
 onready var _countdown_label = $UIOverlay/StartScreen/Box/CountDown
+onready var _race_time_label = $UIOverlay/RaceTime
 
-var _paused = false
 var _started = false
 var _finished = false
 var _race_time = 0.0
@@ -33,9 +33,9 @@ func _process(delta):
 			_start_screen.visible = false
 			_started = true
 
-	elif not _finished and not _paused:
+	elif not _finished and not game_state.paused:
 		_race_time += delta
-
+		_race_time_label.text = "%3.2f" % _race_time
 
 
 func _update_ui():

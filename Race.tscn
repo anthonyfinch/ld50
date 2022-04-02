@@ -144,3 +144,21 @@ margin_top = 110.0
 margin_right = 600.0
 margin_bottom = 168.0
 text = "3"
+
+[node name="Label" parent="UIOverlay" instance=ExtResource( 10 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 0.0
+margin_top = -74.0
+margin_right = 158.0
+margin_bottom = 0.0
+text = "Time:"
+
+[node name="RaceTime" parent="UIOverlay" instance=ExtResource( 10 )]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 158.0
+margin_top = -74.0
+margin_right = 316.0
+margin_bottom = 0.0
+text = "0.0"
