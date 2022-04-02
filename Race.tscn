@@ -133,9 +133,9 @@ __meta__ = {
 
 [node name="Box" type="VBoxContainer" parent="UIOverlay/EndScreen"]
 margin_left = 692.0
-margin_top = 422.0
+margin_top = 451.0
 margin_right = 1228.0
-margin_bottom = 658.0
+margin_bottom = 629.0
 
 [node name="Label" parent="UIOverlay/EndScreen/Box" instance=ExtResource( 3 )]
 margin_left = 0.0
@@ -144,17 +144,15 @@ margin_right = 536.0
 margin_bottom = 106.0
 text = "Race Over"
 
-[node name="EndTime" parent="UIOverlay/EndScreen/Box" instance=ExtResource( 10 )]
-margin_left = 0.0
+[node name="Results" type="VBoxContainer" parent="UIOverlay/EndScreen/Box"]
 margin_top = 110.0
 margin_right = 536.0
-margin_bottom = 168.0
-text = "End Time: 0.0"
+margin_bottom = 110.0
 
 [node name="End" parent="UIOverlay/EndScreen/Box" instance=ExtResource( 5 )]
-margin_top = 172.0
+margin_top = 114.0
 margin_right = 536.0
-margin_bottom = 236.0
+margin_bottom = 178.0
 text = "Exit"
 
 [node name="Label" parent="UIOverlay" instance=ExtResource( 10 )]

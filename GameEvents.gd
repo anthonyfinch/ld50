@@ -3,6 +3,7 @@ class_name GameEvents
 
 signal change_scene(name)
 signal unpause
+signal car_rollcall(race)
 signal start_race
 signal car_finished(who)
 
@@ -21,3 +22,7 @@ func start_race():
 
 func car_finished(who):
 	self.emit_signal("car_finished", who)
+
+
+func car_rollcall(race):
+	self.emit_signal("car_rollcall", race)

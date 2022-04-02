@@ -19,7 +19,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 100.0
+radius = 2050.74
 
 [sub_resource type="Resource" id=4]
 script = ExtResource( 9 )
@@ -406,6 +406,7 @@ script = ExtResource( 4 )
 game_events = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EndZone"]
+position = Vector2( -229, -16 )
 shape = SubResource( 2 )
 
 [node name="Scenery" type="Node2D" parent="."]
@@ -476,10 +477,10 @@ rotation = -3.13818
 
 [node name="Cars" type="Node2D" parent="."]
 
-[node name="Car" parent="Cars" instance=ExtResource( 3 )]
+[node name="Skully" parent="Cars" instance=ExtResource( 3 )]
 position = Vector2( 1247, 453 )
 
-[node name="Camera2D" type="Camera2D" parent="Cars/Car"]
+[node name="Camera2D" type="Camera2D" parent="Cars/Skully"]
 current = true
 script = ExtResource( 5 )
 zoom_factor = 900

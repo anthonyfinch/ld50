@@ -13,6 +13,7 @@ script = ExtResource( 1 )
 game_state = ExtResource( 2 )
 game_events = ExtResource( 3 )
 mode = 1
+active = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 204.5, 107.5 )

@@ -8,6 +8,8 @@ enum Modes {
 export(Resource) var game_state
 export(Resource) var game_events
 export(Modes) var mode = Modes.PlayerControlled
+export(bool) var active = true
+
 
 var wheel_base = 40
 var steering_angle = 10
@@ -21,11 +23,13 @@ var traction_fast = 0.1
 var traction_slow = 0.7
 
 var acceleration = Vector2.ZERO
+var last_acceleration = Vector2.ZERO
 var velocity = Vector2.ZERO
 var steer_direction = 0.0
 
-var _active = false
 var _paused = false
+
+var _end_race_cooldown = 6.0
 
 
 func _ready():
@@ -34,14 +38,20 @@ func _ready():
 	_update_paused()
 	game_state.connect("updated_paused", self, "_update_paused")
 	game_events.connect("start_race", self, "_start_race")
+	game_events.connect("car_rollcall", self, "_report_in")
+
+
+func _report_in(race):
+	race.register_car(self)
 
 
 func _start_race():
-	_active = true
+	active = true
 
 
 func end_race():
-	_active = false
+	last_acceleration = acceleration
+	active = false
 
 
 func _update_paused():
@@ -50,11 +60,17 @@ func _update_paused():
 
 func _physics_process(delta):
 	if not _paused:
-		match mode:
-			Modes.PlayerControlled:
-				_player_mode()
-			Modes.Baddy:
-				_baddy_mode(delta)
+		acceleration = Vector2.ZERO
+		if active:
+			match mode:
+				Modes.PlayerControlled:
+					_player_mode()
+				Modes.Baddy:
+					_baddy_mode(delta)
+
+		elif last_acceleration.length() > 0 and _end_race_cooldown > 0.0:
+			acceleration = last_acceleration
+			_end_race_cooldown -= delta
 
 		apply_friction()
 		calculate_steering(delta)
@@ -63,42 +79,35 @@ func _physics_process(delta):
 
 
 func _baddy_mode(delta):
-	acceleration = Vector2.ZERO
-	if _active:
-		var road = game_state.road
-		var path = road.curve
-		
-		var predicted = position + velocity * delta
-		var offset = path.get_closest_offset(road.to_local(predicted))
-
-		var target = road.to_global(path.interpolate_baked(offset + 1.0))
-
-		var acc = (target - global_position).normalized()
+	var road = game_state.road
+	var path = road.curve
 	
-		acceleration = acc * engine_power
+	var predicted = position + velocity * delta
+	var offset = path.get_closest_offset(road.to_local(predicted))
+
+	var target = road.to_global(path.interpolate_baked(offset + 1.0))
+
+	var acc = (target - global_position).normalized()
+		
+	acceleration = acc * engine_power
 
 
 func _player_mode():
-	acceleration = Vector2.ZERO
-	get_input()
+	var turn = 0
+	if Input.is_action_pressed("left"):
+		turn -= 1
+	if Input.is_action_pressed("right"):
+		turn += 1
+	steer_direction = turn * deg2rad(steering_angle)
+	if Input.is_action_pressed("accelerate"):
+		acceleration = transform.x * engine_power
+	if Input.is_action_pressed("brake"):
+		acceleration = transform.x * braking
+
 
 func move(delta):
 	velocity += acceleration * delta
 	velocity = move_and_slide(velocity)
-
-
-func get_input():
-	if _active:
-		var turn = 0
-		if Input.is_action_pressed("left"):
-			turn -= 1
-		if Input.is_action_pressed("right"):
-			turn += 1
-		steer_direction = turn * deg2rad(steering_angle)
-		if Input.is_action_pressed("accelerate"):
-			acceleration = transform.x * engine_power
-		if Input.is_action_pressed("brake"):
-			acceleration = transform.x * braking
 
 
 func calculate_steering(delta):
