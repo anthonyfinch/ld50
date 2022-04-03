@@ -388,7 +388,7 @@ _next_key = 8
 position = Vector2( -1, 0 )
 
 [node name="Road" type="Path2D" parent="."]
-position = Vector2( 13, 9 )
+position = Vector2( 23, 19 )
 curve = SubResource( 1 )
 script = ExtResource( 6 )
 game_state = ExtResource( 12 )

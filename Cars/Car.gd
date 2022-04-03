@@ -10,7 +10,7 @@ export(Resource) var game_events
 export (float) var max_baddy_velocity = 1800
 export (float) var baddy_losing_speed = 1300
 export (float) var baddy_winning_speed = 1000
-export (float) var max_collision_movement = 500
+export (float) var max_collision_movement = 250
 
 export(Modes) var mode = Modes.PlayerControlled
 export(bool) var active = true
@@ -93,20 +93,45 @@ func _physics_process(delta):
 		_process_collisions()
 
 
+func set_collision_movement(val):
+	collision_movement = val
+	match mode:
+		Modes.PlayerControlled:
+			collision_movement = collision_movement.clamped(max_collision_movement)
+		Modes.Baddy:
+			collision_movement = collision_movement.clamped(max_baddy_velocity)
+
+
+func smash(vel: Vector2):
+	set_collision_movement(collision_movement + vel)
+
 func _collision_movement():
 	if collision_movement.length() > 0.1:
+		# if mode != Modes.PlayerControlled:
+		# 	print(collision_movement)
+
 		var _c = move_and_slide(collision_movement)
 		collision_movement *= 0.9
 
 
 func _process_collisions():
 	for i in get_slide_count():
-		var coll = get_slide_collision(i)
-		collision_movement += -1 * coll.remainder
+		var coll: KinematicCollision2D = get_slide_collision(i)
+		set_collision_movement(collision_movement + -1 * coll.remainder)
+
+		var rem = coll.remainder
+		if mode == Modes.PlayerControlled:
+			rem *= 1000.0
+
+		if coll.collider.has_method("smash"):
+			coll.collider.smash(rem)
+		# if coll.collider.has_method("move_and_slide"):
+		# 	coll.collider.move_and_slide(coll.remainder)
 
 
-	velocity += (collision_movement * 10.0)
-	# collision_movement = collision_movement.clamped(max_collision_movement)
+
+	collision_movement = collision_movement.clamped(max_collision_movement)
+	# velocity += (collision_movement * 10.0)
 
 
 func _update_engine_noise():
@@ -153,21 +178,7 @@ func _baddy_mode(_delta):
 		# 	rotation = desired.angle() - (PI/2)
 		rotation = desired.angle()
 
-	velocity = move_and_slide(velocity)
-	# apply_friction()
-
-	# var acc = (target - global_position).normalized()
-		
-	# var ang = acc.angle_to(velocity)
-
-	# if (target - to_global(predicted)).length() > 8 or abs(ang) > 0.5:
-
-	# 	acceleration = acc * engine_power
-
-	# 	var turn = 0
-	# 	if abs(ang) > 0.6:
-	# 		turn = -1 * sign(ang)
-	# 	steer_direction = turn * deg2rad(steering_angle)
+	velocity = move_and_slide(velocity + collision_movement)
 
 
 func _player_mode(delta):

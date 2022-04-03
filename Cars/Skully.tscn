@@ -1,29 +1,41 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Cars/Car.gd" type="Script" id=1]
 [ext_resource path="res://game_state.tres" type="Resource" id=2]
 [ext_resource path="res://game_events.tres" type="Resource" id=3]
-[ext_resource path="res://Cars/skully_v1_export.png" type="Texture" id=4]
+[ext_resource path="res://Cars/wheel.png" type="Texture" id=4]
 [ext_resource path="res://Cars/EngineSound.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Cars/skully_v2_chassis_export.png" type="Texture" id=6]
+[ext_resource path="res://Cars/SmokeLocasl.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Cars/SmokeGlobal.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 50.9998
-height = 140.001
+radius = 49.9997
+height = 104.001
 
 [node name="Car" type="KinematicBody2D"]
 script = ExtResource( 1 )
 game_state = ExtResource( 2 )
 game_events = ExtResource( 3 )
 
+[node name="Particles2D2" parent="." instance=ExtResource( 9 )]
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -38, 0 )
+position = Vector2( 0, 1 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="SkullyV1Export" type="Sprite" parent="CollisionShape2D"]
-position = Vector2( -0.00013756, -38 )
+position = Vector2( 5.99951, -130 )
 rotation = 3.14159
 scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[node name="Wheel" type="Sprite" parent="CollisionShape2D/SkullyV1Export"]
+show_behind_parent = true
+position = Vector2( 1.99995, -12.0001 )
 texture = ExtResource( 4 )
+
+[node name="Particles2D" parent="CollisionShape2D/SkullyV1Export" instance=ExtResource( 7 )]
 
 [node name="EngineSound" parent="." instance=ExtResource( 5 )]

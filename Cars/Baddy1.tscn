@@ -1,22 +1,52 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Cars/Car.gd" type="Script" id=1]
 [ext_resource path="res://game_state.tres" type="Resource" id=2]
 [ext_resource path="res://game_events.tres" type="Resource" id=3]
 [ext_resource path="res://Cars/enemy_v1.png" type="Texture" id=4]
 [ext_resource path="res://Cars/EngineSound.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Cars/SmokeLocasl.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Cars/SmokeGlobal.tscn" type="PackedScene" id=7]
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 30, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = -50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.4
+anim_offset_random = 0.56
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 106.25, 55.75 )
 
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 30, 1 )
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = -50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.2
+anim_offset_random = 0.56
+
 [node name="Baddy1" type="KinematicBody2D"]
+position = Vector2( 4, -6 )
 script = ExtResource( 1 )
 game_state = ExtResource( 2 )
 game_events = ExtResource( 3 )
+max_baddy_velocity = 3600.0
 baddy_losing_speed = 1600.0
 baddy_winning_speed = 500.0
 mode = 1
 active = false
+
+[node name="Particles2D2" parent="." instance=ExtResource( 7 )]
+position = Vector2( -3, -1 )
+process_material = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -25,5 +55,11 @@ shape = SubResource( 1 )
 rotation = 1.5708
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
+
+[node name="Particles2D" parent="CollisionShape2D/EnemyV1" instance=ExtResource( 6 )]
+position = Vector2( -26.0005, -146 )
+rotation = -1.71511
+scale = Vector2( 4, 4 )
+process_material = SubResource( 3 )
 
 [node name="EngineSound" parent="." instance=ExtResource( 5 )]
