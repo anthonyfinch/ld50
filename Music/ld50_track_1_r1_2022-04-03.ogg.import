@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ld50_track_1_r1_2022-04-03.ogg-9f7cb393e937b5f2fd68cca658aeff28.oggstr"
+
+[deps]
+
+source_file="res://Music/ld50_track_1_r1_2022-04-03.ogg"
+dest_files=[ "res://.import/ld50_track_1_r1_2022-04-03.ogg-9f7cb393e937b5f2fd68cca658aeff28.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
