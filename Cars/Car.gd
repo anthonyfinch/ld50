@@ -10,6 +10,7 @@ export(Resource) var game_events
 export (float) var max_baddy_velocity = 1800
 export (float) var baddy_losing_speed = 1300
 export (float) var baddy_winning_speed = 1000
+export (float) var max_collision_movement = 500
 
 export(Modes) var mode = Modes.PlayerControlled
 export(bool) var active = true
@@ -30,15 +31,18 @@ var acceleration = Vector2.ZERO
 var last_acceleration = Vector2.ZERO
 var velocity = Vector2.ZERO
 var steer_direction = 0.0
+var collision_movement = Vector2.ZERO
 
 onready var _engine_sound = $EngineSound
 
+var _rand_pos_range = 10.0
+var _rand_offset = Vector2.ZERO
 var _paused = false
-
 var _end_race_cooldown = 6.0
 
 
 func _ready():
+	randomize()
 	assert(game_state != null, "Please set game state resource")
 	assert(game_events != null, "Please set game events resource")
 	_update_paused()
@@ -46,6 +50,12 @@ func _ready():
 	game_state.connect("updated_paused", self, "_update_paused")
 	game_events.connect("start_race", self, "_start_race")
 	game_events.connect("car_rollcall", self, "_report_in")
+
+	_rand_offset = Vector2(
+		rand_range(-1 * _rand_pos_range, _rand_pos_range),
+		rand_range(-1 * _rand_pos_range, _rand_pos_range)
+	)
+	print(_rand_offset)
 
 
 func _report_in(race):
@@ -70,6 +80,7 @@ func _update_paused():
 
 func _physics_process(delta):
 	if not _paused:
+		_collision_movement()
 		acceleration = Vector2.ZERO
 		match mode:
 			Modes.PlayerControlled:
@@ -78,6 +89,24 @@ func _physics_process(delta):
 				_baddy_mode(delta)
 				
 		_set_engine_noise()
+
+		_process_collisions()
+
+
+func _collision_movement():
+	if collision_movement.length() > 0.1:
+		var _c = move_and_slide(collision_movement)
+		collision_movement *= 0.9
+
+
+func _process_collisions():
+	for i in get_slide_count():
+		var coll = get_slide_collision(i)
+		collision_movement += -1 * coll.remainder
+
+
+	velocity += (collision_movement * 10.0)
+	# collision_movement = collision_movement.clamped(max_collision_movement)
 
 
 func _update_engine_noise():
@@ -104,12 +133,17 @@ func _baddy_mode(_delta):
 
 		# print("I'm %s and you are %s" % [offset, game_state.last_player_offset])
 
-		var target = road.to_global(path.interpolate_baked(offset+ 20))
+		# var target = road.to_global(path.interpolate_baked(offset + 10))
 
 
 		var desired_vel = baddy_losing_speed
 		if offset > game_state.last_player_offset:
 			desired_vel = baddy_winning_speed
+
+		desired_vel += _rand_offset.x * 10.0
+
+		var target = road.to_global(path.interpolate_baked(offset + 500 * (1 - (min(desired_vel, max_baddy_velocity) / max_baddy_velocity))))
+
 
 		var desired = (target - global_position).normalized() * desired_vel
 		velocity += desired
@@ -119,7 +153,9 @@ func _baddy_mode(_delta):
 		# 	rotation = desired.angle() - (PI/2)
 		rotation = desired.angle()
 
-	var _c = move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
+	# apply_friction()
+
 	# var acc = (target - global_position).normalized()
 		
 	# var ang = acc.angle_to(velocity)

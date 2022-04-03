@@ -13,6 +13,7 @@
 [ext_resource path="res://game_state.tres" type="Resource" id=12]
 
 [sub_resource type="Curve2D" id=1]
+bake_interval = 3.0
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 95, 215, 0, 0, 0, 0, 1754, 427, 0, 0, 0, 0, 5759, 585, 0, 0, 0, 0, 9892, 510, 0, 0, 0, 0, 12554, 488, -1107.48, -1047.07, 1107.48, 1047.07, 16744, 160, 0, 0, 0, 0, 16947, 12385, 0, 0, 0, 0, 489, 11809, 0, 0, 0, 0, -10382, 12486, 0, 0, 0, 0, -15902, 5680, 0, 0, 0, 0, -10991, 261, 0, 0, 0, 0, -4862, 261, 0, 0, 0, 0, 95, 215 )
 }
@@ -469,7 +470,7 @@ rotation = -3.13818
 [node name="Cars" type="Node2D" parent="."]
 
 [node name="Skully" parent="Cars" instance=ExtResource( 3 )]
-position = Vector2( 1247, 453 )
+position = Vector2( 4022, 529 )
 
 [node name="Camera2D" type="Camera2D" parent="Cars/Skully"]
 current = true
@@ -478,16 +479,16 @@ script = ExtResource( 5 )
 zoom_factor = 1000
 
 [node name="Baddy1" parent="Cars" instance=ExtResource( 11 )]
-position = Vector2( 321, -213 )
+position = Vector2( 3081, 473 )
 rotation = 0.279646
 active = true
 
 [node name="Baddy2" parent="Cars" instance=ExtResource( 11 )]
-position = Vector2( 41.9999, 964 )
+position = Vector2( 1711, 388 )
 rotation = 0.675389
 active = true
 
 [node name="Baddy3" parent="Cars" instance=ExtResource( 11 )]
-position = Vector2( 237, 285 )
+position = Vector2( 570, 285 )
 rotation = -6.09991
 active = true
