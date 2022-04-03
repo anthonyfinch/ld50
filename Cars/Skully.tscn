@@ -7,8 +7,8 @@
 [ext_resource path="res://Cars/EngineSound.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 88.9994
-height = 274.0
+radius = 50.9998
+height = 140.001
 
 [node name="Car" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -23,6 +23,7 @@ shape = SubResource( 1 )
 [node name="SkullyV1Export" type="Sprite" parent="CollisionShape2D"]
 position = Vector2( -0.00013756, -38 )
 rotation = 3.14159
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
 
 [node name="EngineSound" parent="." instance=ExtResource( 5 )]

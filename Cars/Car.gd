@@ -9,11 +9,11 @@ export(Resource) var game_state
 export(Resource) var game_events
 export(Modes) var mode = Modes.PlayerControlled
 export(bool) var active = true
+export var engine_power = 3600
 
 
 var wheel_base = 40
 var steering_angle = 10
-var engine_power = 3600
 var friction = -0.5
 var drag = -0.001
 var braking = -450
@@ -108,7 +108,16 @@ func _baddy_mode(delta):
 
 	var acc = (target - global_position).normalized()
 		
-	acceleration = acc * engine_power
+	var ang = acc.angle_to(velocity)
+
+	if (target - to_global(predicted)).length() > 8 or abs(ang) > 0.5:
+
+		acceleration = acc * engine_power
+
+		var turn = 0
+		if abs(ang) > 0.6:
+			turn = -1 * sign(ang)
+		steer_direction = turn * deg2rad(steering_angle)
 
 
 func _player_mode():
