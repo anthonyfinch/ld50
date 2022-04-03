@@ -482,6 +482,7 @@ position = Vector2( 1247, 453 )
 
 [node name="Camera2D" type="Camera2D" parent="Cars/Skully"]
 current = true
+process_mode = 0
 script = ExtResource( 5 )
 zoom_factor = 900
 

@@ -27,6 +27,8 @@ var last_acceleration = Vector2.ZERO
 var velocity = Vector2.ZERO
 var steer_direction = 0.0
 
+onready var _engine_sound = $EngineSound
+
 var _paused = false
 
 var _end_race_cooldown = 6.0
@@ -36,6 +38,7 @@ func _ready():
 	assert(game_state != null, "Please set game state resource")
 	assert(game_events != null, "Please set game events resource")
 	_update_paused()
+	_update_engine_noise()
 	game_state.connect("updated_paused", self, "_update_paused")
 	game_events.connect("start_race", self, "_start_race")
 	game_events.connect("car_rollcall", self, "_report_in")
@@ -47,15 +50,18 @@ func _report_in(race):
 
 func _start_race():
 	active = true
+	_update_engine_noise()
 
 
 func end_race():
 	last_acceleration = acceleration
 	active = false
+	_update_engine_noise()
 
 
 func _update_paused():
 	_paused = game_state.paused
+	_update_engine_noise()
 
 
 func _physics_process(delta):
@@ -75,7 +81,20 @@ func _physics_process(delta):
 		apply_friction()
 		calculate_steering(delta)
 		move(delta)
+		_set_engine_noise()
 
+
+func _update_engine_noise():
+	if _engine_sound != null:
+		if not _paused and active:
+			_engine_sound.play()
+		else:
+			_engine_sound.stop()
+
+
+func _set_engine_noise():
+	if _engine_sound != null:
+		_engine_sound.pitch_scale = 1 + velocity.length() / 400
 
 
 func _baddy_mode(delta):

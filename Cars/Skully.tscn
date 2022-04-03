@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Cars/Car.gd" type="Script" id=1]
 [ext_resource path="res://game_state.tres" type="Resource" id=2]
 [ext_resource path="res://game_events.tres" type="Resource" id=3]
 [ext_resource path="res://Cars/skully_v1_export.png" type="Texture" id=4]
+[ext_resource path="res://Cars/EngineSound.tscn" type="PackedScene" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 88.9994
@@ -23,3 +24,5 @@ shape = SubResource( 1 )
 position = Vector2( -0.00013756, -38 )
 rotation = 3.14159
 texture = ExtResource( 4 )
+
+[node name="EngineSound" parent="." instance=ExtResource( 5 )]

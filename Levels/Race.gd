@@ -11,6 +11,8 @@ onready var _countdown_label = $UIOverlay/StartScreen/Box/CountDown
 onready var _end_screen = $UIOverlay/EndScreen
 onready var _end_screen_results = $UIOverlay/EndScreen/Box/Results
 onready var _race_time_label = $UIOverlay/RaceTime
+onready var _start_sound_1 = $Sounds/Start1
+onready var _start_sound_2 = $Sounds/Start2
 
 var _started = false
 var _finished = false
@@ -61,7 +63,14 @@ func _car_finished(who):
 
 func _process(delta):
 	if not _started:
+		var old = _count_down
 		_count_down -= delta
+		var new = _count_down
+		if floor(new) < floor(old):
+			if floor(new) == 0:
+				_start_sound_2.play()
+			else:
+				_start_sound_1.play()
 		_countdown_label.text = str(floor(_count_down))
 
 		if _count_down <= 0.0:

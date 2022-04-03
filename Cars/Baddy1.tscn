@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Cars/Car.gd" type="Script" id=1]
 [ext_resource path="res://game_state.tres" type="Resource" id=2]
 [ext_resource path="res://game_events.tres" type="Resource" id=3]
 [ext_resource path="res://Cars/enemy_v1.png" type="Texture" id=4]
+[ext_resource path="res://Cars/EngineSound.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 214.5, 117.5 )
@@ -22,3 +23,5 @@ shape = SubResource( 1 )
 [node name="EnemyV1" type="Sprite" parent="CollisionShape2D"]
 rotation = 1.5708
 texture = ExtResource( 4 )
+
+[node name="EngineSound" parent="." instance=ExtResource( 5 )]
