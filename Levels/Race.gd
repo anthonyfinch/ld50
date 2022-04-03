@@ -7,10 +7,10 @@ export(Resource) var game_state
 
 onready var _pause_screen = $UIOverlay/PauseScreen
 onready var _start_screen = $UIOverlay/StartScreen
-onready var _countdown_label = $UIOverlay/StartScreen/Box/CountDown
+onready var _countdown_label = $UIOverlay/StartScreen/PanelContainer/Box/CountDown
 onready var _end_screen = $UIOverlay/EndScreen
-onready var _end_screen_results = $UIOverlay/EndScreen/Box/Results
-onready var _race_time_label = $UIOverlay/RaceTime
+onready var _end_screen_results = $UIOverlay/EndScreen/PanelContainer/Box/Results
+onready var _race_time_label = $UIOverlay/Panel/RaceTime
 onready var _start_sound_1 = $Sounds/Start1
 onready var _start_sound_2 = $Sounds/Start2
 

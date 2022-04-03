@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://UI/KenneyBold32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/FontHeaderMed.tres" type="DynamicFont" id=1]
 
 [node name="Label" type="Label"]
 margin_left = 832.0

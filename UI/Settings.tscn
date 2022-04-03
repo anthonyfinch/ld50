@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://UI/KenneyBold24.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/FontPlainMed.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Levels/ld50_lo_note_r1_2022-04-03.wav" type="AudioStream" id=2]
 [ext_resource path="res://game_events.tres" type="Resource" id=3]
 [ext_resource path="res://UI/AudioSettingsSlider.gd" type="Script" id=5]
@@ -23,19 +23,19 @@ __meta__ = {
 
 [node name="Music" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 2.0
-margin_right = 1130.0
+margin_right = 1144.0
 margin_bottom = 48.0
 alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/Music"]
-margin_right = 126.0
+margin_right = 136.0
 margin_bottom = 46.0
 custom_fonts/font = ExtResource( 1 )
-text = "Music:  "
+text = "Music:"
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/Music"]
-margin_left = 130.0
-margin_right = 1130.0
+margin_left = 140.0
+margin_right = 1144.0
 margin_bottom = 46.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 3
@@ -48,18 +48,18 @@ bus_name = "Music"
 
 [node name="SFX" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 52.0
-margin_right = 1130.0
+margin_right = 1144.0
 margin_bottom = 98.0
 
 [node name="Label" type="Label" parent="VBoxContainer/SFX"]
-margin_right = 126.0
+margin_right = 140.0
 margin_bottom = 46.0
 custom_fonts/font = ExtResource( 1 )
 text = "SFX:      "
 
 [node name="HSlider" type="HSlider" parent="VBoxContainer/SFX"]
-margin_left = 130.0
-margin_right = 1130.0
+margin_left = 144.0
+margin_right = 1144.0
 margin_bottom = 46.0
 rect_min_size = Vector2( 1000, 0 )
 size_flags_horizontal = 3

@@ -23,26 +23,27 @@ __meta__ = {
 
 [node name="Label" parent="VBoxContainer" instance=ExtResource( 1 )]
 margin_left = 0.0
-margin_top = 355.0
+margin_top = 363.0
 margin_right = 1920.0
-margin_bottom = 461.0
+margin_bottom = 445.0
 text = "Settings"
 
 [node name="Settings" parent="VBoxContainer" instance=ExtResource( 2 )]
 margin_left = 410.0
-margin_top = 511.0
+margin_top = 495.0
 margin_right = 1510.0
-margin_bottom = 611.0
+margin_bottom = 595.0
 rect_min_size = Vector2( 1100, 100 )
 size_flags_horizontal = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 661.0
+margin_top = 645.0
 margin_right = 1920.0
-margin_bottom = 725.0
+margin_bottom = 716.0
 alignment = 1
 
 [node name="Back" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 890.0
-margin_right = 1030.0
-text = "Back"
+margin_left = 877.0
+margin_right = 1043.0
+margin_bottom = 71.0
+text = " Back "

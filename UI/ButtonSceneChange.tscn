@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://UI/KenneyBold32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://UI/FontHeaderMed.tres" type="DynamicFont" id=1]
 [ext_resource path="res://UI/ButtonChangeScene.gd" type="Script" id=2]
 [ext_resource path="res://game_events.tres" type="Resource" id=3]
+[ext_resource path="res://UI/base_theme.tres" type="Theme" id=4]
 
 [node name="Instructions" type="Button"]
 margin_right = 364.0
 margin_bottom = 64.0
+theme = ExtResource( 4 )
 custom_fonts/font = ExtResource( 1 )
 text = "Instructions"
 script = ExtResource( 2 )
