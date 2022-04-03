@@ -5,6 +5,7 @@ signal updated_paused
 
 var paused = false setget set_paused,get_paused
 var road
+var last_player_offset
 
 
 func set_paused(val):

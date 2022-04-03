@@ -13,6 +13,8 @@ extents = Vector2( 106.25, 55.75 )
 script = ExtResource( 1 )
 game_state = ExtResource( 2 )
 game_events = ExtResource( 3 )
+baddy_losing_speed = 2000.0
+baddy_winning_speed = 100.0
 mode = 1
 active = false
 
