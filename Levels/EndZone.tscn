@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://UI/LabelSmall.tscn" type="PackedScene" id=1]
+[ext_resource path="res://game_events.tres" type="Resource" id=2]
+[ext_resource path="res://UI/Kenney Future Narrow.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Levels/EndZone.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 2000, 1000 )
+
+[sub_resource type="DynamicFont" id=56]
+size = 512
+extra_spacing_top = 15
+extra_spacing_bottom = 10
+extra_spacing_char = 100
+font_data = ExtResource( 3 )
+
+[node name="EndZone" type="Area2D"]
+position = Vector2( 10104, 508 )
+script = ExtResource( 4 )
+game_events = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -10092, -525 )
+shape = SubResource( 4 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2( -19798, 3974 )
+color = Color( 0.658824, 0.788235, 0.188235, 0.364706 )
+polygon = PoolVector2Array( 7600, -5588, 11766, -5596, 11791, -3395, 7592, -3395 )
+
+[node name="Label" parent="." instance=ExtResource( 1 )]
+margin_left = -11480.0
+margin_top = -828.0
+margin_right = -8832.0
+margin_bottom = -227.0
+custom_fonts/font = SubResource( 56 )
+text = "FINISH"
