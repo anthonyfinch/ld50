@@ -89,6 +89,8 @@ custom_constants/separation = 50
 alignment = 1
 
 [node name="Instructions" parent="VBoxContainer/Buttons/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 0.0
+margin_top = 0.0
 margin_right = 422.0
 margin_bottom = 71.0
 text = " Instructions "
@@ -96,6 +98,7 @@ scene_name = "Instructions"
 
 [node name="Settings" parent="VBoxContainer/Buttons/HBoxContainer" instance=ExtResource( 3 )]
 margin_left = 472.0
+margin_top = 0.0
 margin_right = 770.0
 margin_bottom = 71.0
 text = " Settings "
@@ -103,6 +106,7 @@ scene_name = "Settings"
 
 [node name="Play" parent="VBoxContainer/Buttons/HBoxContainer" instance=ExtResource( 3 )]
 margin_left = 820.0
+margin_top = 0.0
 margin_right = 990.0
 margin_bottom = 71.0
 text = " Play "

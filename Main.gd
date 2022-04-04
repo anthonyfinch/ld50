@@ -22,6 +22,11 @@ func _ready() -> void:
 
 func _load_scene(scene: Resource) -> void:
 	_current_scene = scene.instance()
+	if _current_scene.has_method("reload"):
+		print("I got reload")
+		_current_scene.reload()
+	else:
+		print("what no reload")
 	_scene_holder.add_child(_current_scene)
 
 
@@ -33,7 +38,7 @@ func _goto_scene(name: String) -> void:
 
 	_current_scene.queue_free()
 
-	_wait_frames = 1
+	_wait_frames = 30
 
 
 func _process(_delta: float) -> void:
@@ -49,6 +54,7 @@ func _process(_delta: float) -> void:
 
 	while OS.get_ticks_msec() < t + _time_max:
 		var err = _loader.poll()
+		print(err)
 
 		if err == ERR_FILE_EOF:
 			var resource = _loader.get_resource()

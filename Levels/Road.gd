@@ -13,7 +13,6 @@ export (float) var line_width = 5.0
 func _ready():
 	assert(game_state != null, "Please set game state resource")
 	game_state.road = self
-	var _c = connect("changed", self, "update")
 
 
 func _draw():
