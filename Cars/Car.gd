@@ -121,7 +121,7 @@ func _process_collisions():
 
 		var rem = coll.remainder
 		if mode == Modes.PlayerControlled:
-			rem *= 1000.0
+			rem *= 500.0
 
 		if coll.collider.has_method("smash"):
 			coll.collider.smash(rem)
@@ -162,12 +162,12 @@ func _baddy_mode(_delta):
 
 
 		var desired_vel = baddy_losing_speed
-		if offset > game_state.last_player_offset:
+		if offset >= game_state.last_player_offset:
 			desired_vel = baddy_winning_speed
 
-		desired_vel += _rand_offset.x * 10.0
+		desired_vel += _rand_offset.x * 100.0
 
-		var target = road.to_global(path.interpolate_baked(offset + 500 * (1 - (min(desired_vel, max_baddy_velocity) / max_baddy_velocity))))
+		var target = road.to_global(path.interpolate_baked(offset + 250 + (500 * (1 - (min(desired_vel, max_baddy_velocity) / max_baddy_velocity)))))
 
 
 		var desired = (target - global_position).normalized() * desired_vel
