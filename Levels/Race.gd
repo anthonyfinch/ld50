@@ -4,6 +4,7 @@ const RaceResult = preload("res://Levels/RaceResult.tscn")
 
 const BaseLevel = preload("res://Levels/BaseLevel.tscn")
 const Level1 = preload("res://Levels/Level1.tscn")
+const Level2 = preload("res://Levels/Level2.tscn")
 
 export(Resource) var game_events
 export(Resource) var game_state
@@ -34,7 +35,8 @@ var _level
 
 var _levels = {
 	"BaseLevel": BaseLevel,
-	"Level1": Level1
+	"Level1": Level1,
+	"Level2": Level2
 }
 
 
@@ -48,7 +50,7 @@ func _ready():
 	game_events.connect("unpause", self, "_unpause")
 	game_events.connect("car_finished", self, "_car_finished")
 
-	print("Loading in %s" % GameState.next_level)
+	print("Loading in %s" % GlobalState.next_level)
 
 	if _level != null:
 		_level.queue_free()

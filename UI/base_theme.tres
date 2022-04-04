@@ -1,6 +1,17 @@
-[gd_resource type="Theme" load_steps=2 format=2]
+[gd_resource type="Theme" load_steps=3 format=2]
 
 [ext_resource path="res://UI/base_stylebox.tres" type="StyleBox" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.341176, 0.164706, 0.32549, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0.658824, 0.788235, 0.188235, 1 )
+corner_radius_top_left = 5
+corner_radius_bottom_right = 5
+shadow_size = 10
 
 [resource]
 Button/colors/font_color = Color( 1, 1, 1, 1 )
@@ -11,8 +22,8 @@ Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
 Button/constants/hseparation = 0
 Button/styles/disabled = null
 Button/styles/focus = null
-Button/styles/hover = null
+Button/styles/hover = ExtResource( 1 )
 Button/styles/normal = ExtResource( 1 )
-Button/styles/pressed = null
+Button/styles/pressed = SubResource( 1 )
 Panel/styles/panel = ExtResource( 1 )
 PanelContainer/styles/panel = ExtResource( 1 )

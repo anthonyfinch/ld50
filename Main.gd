@@ -38,7 +38,7 @@ func _goto_scene(name: String) -> void:
 
 	_current_scene.queue_free()
 
-	_wait_frames = 30
+	_wait_frames = 3
 
 
 func _process(_delta: float) -> void:
