@@ -35,7 +35,7 @@ var collision_movement = Vector2.ZERO
 
 onready var _engine_sound = $EngineSound
 
-var _rand_pos_range = 10.0
+var _rand_pos_range = 100.0
 var _rand_offset = Vector2.ZERO
 var _paused = false
 var _end_race_cooldown = 6.0
@@ -87,7 +87,7 @@ func _physics_process(delta):
 				_player_mode(delta)
 			Modes.Baddy:
 				_baddy_mode(delta)
-				
+
 		_set_engine_noise()
 
 		_process_collisions()
@@ -104,6 +104,10 @@ func set_collision_movement(val):
 
 func smash(vel: Vector2):
 	set_collision_movement(collision_movement + vel)
+
+func hit(vel):
+	velocity += -1 * vel
+
 
 func _collision_movement():
 	if collision_movement.length() > 0.1:
@@ -147,12 +151,12 @@ func _set_engine_noise():
 		_engine_sound.pitch_scale = min(2.5, 1 + velocity.length() / 400)
 
 
-func _baddy_mode(_delta):
-	velocity = Vector2.ZERO
+func _baddy_mode(delta):
+	# velocity = Vector2.ZERO
 	var road = game_state.road
 	if road != null:
 		var path = road.curve
-	
+
 		# var predicted = position + velocity * delta
 		var offset = path.get_closest_offset(road.to_local(global_position))
 
@@ -162,15 +166,15 @@ func _baddy_mode(_delta):
 
 
 		var desired_vel = baddy_losing_speed
-		if offset >= game_state.last_player_offset:
-			desired_vel = baddy_winning_speed
+		# if offset >= game_state.last_player_offset:
+			# desired_vel = baddy_winning_speed
 
-		desired_vel += _rand_offset.x * 100.0
+		desired_vel += _rand_offset.x
 
 		var target = road.to_global(path.interpolate_baked(offset + 250 + (500 * (1 - (min(desired_vel, max_baddy_velocity) / max_baddy_velocity)))))
 
 
-		var desired = (target - global_position).normalized() * desired_vel
+		var desired = (target + _rand_offset - global_position).normalized() * desired_vel
 		velocity += desired
 		velocity = velocity.clamped(max_baddy_velocity)
 
@@ -178,7 +182,12 @@ func _baddy_mode(_delta):
 		# 	rotation = desired.angle() - (PI/2)
 		rotation = desired.angle()
 
-	velocity = move_and_slide(velocity + collision_movement)
+	# velocity = move_and_slide(velocity + collision_movement)
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		velocity = velocity.bounce(collision.normal)
+		if collision.collider.has_method("hit"):
+			collision.collider.hit(velocity)
 
 
 func _player_mode(delta):
@@ -210,8 +219,13 @@ func _player_mode(delta):
 
 func move(delta):
 	velocity += acceleration * delta
-	velocity = move_and_slide(velocity)
+	# velocity = move_and_slide(velocity)
 
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		velocity = velocity.bounce(collision.normal)
+		if collision.collider.has_method("hit"):
+			collision.collider.hit(velocity)
 
 func calculate_steering(delta):
 	var rear_wheel = position - transform.x * wheel_base/2.0

@@ -400,7 +400,7 @@ width = 250.0
 line_width = 30.0
 
 [node name="EndZone" parent="." instance=ExtResource( 1 )]
-position = Vector2( 27176, 7187 )
+position = Vector2( 32686, 10134 )
 
 [node name="Scenery" type="Node2D" parent="."]
 
