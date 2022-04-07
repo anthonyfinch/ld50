@@ -148,6 +148,11 @@ _global_script_classes=[ {
 "class": "SS2D_VertexProperties",
 "language": "GDScript",
 "path": "res://addons/rmsmartshape/vertex_properties.gd"
+}, {
+"base": "Node2D",
+"class": "TireMark",
+"language": "GDScript",
+"path": "res://Cars/TireMark.gd"
 } ]
 _global_script_class_icons={
 "GameEvents": "",
@@ -177,7 +182,8 @@ _global_script_class_icons={
 "SS2D_Shape_Open": "res://addons/rmsmartshape/assets/open_shape.png",
 "SS2D_Shape_Render": "",
 "SS2D_Strings": "",
-"SS2D_VertexProperties": ""
+"SS2D_VertexProperties": "",
+"TireMark": ""
 }
 
 [application]

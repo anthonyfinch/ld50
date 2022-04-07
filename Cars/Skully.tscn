@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Cars/Car.gd" type="Script" id=1]
 [ext_resource path="res://game_state.tres" type="Resource" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Cars/EngineSound.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Cars/skully_v2_chassis_export.png" type="Texture" id=6]
 [ext_resource path="res://Cars/SmokeLocasl.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Cars/TireMark.gd" type="Script" id=8]
 [ext_resource path="res://Cars/SmokeGlobal.tscn" type="PackedScene" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -19,6 +20,22 @@ game_state = ExtResource( 2 )
 game_events = ExtResource( 3 )
 
 [node name="Particles2D2" parent="." instance=ExtResource( 9 )]
+show_behind_parent = false
+
+[node name="TireMark1" type="Node2D" parent="."]
+position = Vector2( -17, -62 )
+z_index = -10
+script = ExtResource( 8 )
+
+[node name="TireMark2" type="Node2D" parent="."]
+position = Vector2( -21, 60 )
+z_index = -10
+script = ExtResource( 8 )
+
+[node name="TireMark3" type="Node2D" parent="."]
+position = Vector2( 120, 4 )
+z_index = -10
+script = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )

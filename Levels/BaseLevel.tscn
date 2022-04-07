@@ -391,6 +391,7 @@ script = ExtResource( 4 )
 
 [node name="Road" type="Path2D" parent="."]
 position = Vector2( 23, 19 )
+z_index = -50
 curve = SubResource( 1 )
 script = ExtResource( 6 )
 game_state = ExtResource( 12 )
