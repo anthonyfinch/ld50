@@ -39,9 +39,10 @@ position = Vector2( 4, -6 )
 script = ExtResource( 1 )
 game_state = ExtResource( 2 )
 game_events = ExtResource( 3 )
-max_baddy_velocity = 1000.0
-baddy_losing_speed = 150.0
-baddy_winning_speed = 500.0
+max_baddy_velocity = 1450.0
+max_baddy_velocity_winning = 900.0
+baddy_losing_speed = 101.0
+baddy_winning_speed = 100.0
 mode = 1
 active = false
 
@@ -67,6 +68,7 @@ script = ExtResource( 8 )
 
 [node name="Particles2D2" parent="." instance=ExtResource( 7 )]
 position = Vector2( -3, -1 )
+visibility_rect = Rect2( -500, -500, 1000, 1000 )
 process_material = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

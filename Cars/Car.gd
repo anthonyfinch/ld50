@@ -8,6 +8,7 @@ enum Modes {
 export(Resource) var game_state
 export(Resource) var game_events
 export (float) var max_baddy_velocity = 1800
+export (float) var max_baddy_velocity_winning = 1800
 export (float) var baddy_losing_speed = 1300
 export (float) var baddy_winning_speed = 1000
 export (float) var max_collision_movement = 250
@@ -18,7 +19,7 @@ export var engine_power = 2600
 
 
 var wheel_base = 40
-var steering_angle = 10
+var steering_angle = 3
 var friction = -0.5
 var drag = -0.001
 var braking = -450
@@ -176,7 +177,13 @@ func _baddy_mode(delta):
 
 		var desired = (target + _rand_offset - global_position).normalized() * desired_vel
 		velocity += desired
-		velocity = velocity.clamped(max_baddy_velocity)
+
+		var max_vel = max_baddy_velocity
+		if offset >= game_state.last_player_offset:
+			max_vel = max_baddy_velocity_winning
+
+
+		velocity = velocity.clamped(max_vel)
 
 		# if abs(desired.angle()) > 2.0:
 		# 	rotation = desired.angle() - (PI/2)
