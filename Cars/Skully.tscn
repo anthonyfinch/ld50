@@ -21,6 +21,7 @@ game_events = ExtResource( 3 )
 
 [node name="Particles2D2" parent="." instance=ExtResource( 9 )]
 show_behind_parent = false
+position = Vector2( 0, 0 )
 
 [node name="TireMark1" type="Node2D" parent="."]
 position = Vector2( -17, -62 )
