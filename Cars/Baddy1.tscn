@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Cars/Car.gd" type="Script" id=1]
 [ext_resource path="res://game_state.tres" type="Resource" id=2]
@@ -33,6 +33,10 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.2
 anim_offset_random = 0.56
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 55.0
+height = 134.0
 
 [node name="Baddy1" type="KinematicBody2D"]
 position = Vector2( 4, -6 )
@@ -86,3 +90,11 @@ scale = Vector2( 4, 4 )
 process_material = SubResource( 3 )
 
 [node name="EngineSound" parent="." instance=ExtResource( 5 )]
+
+[node name="CollisionAvoider" type="Area2D" parent="."]
+rotation = 1.5708
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAvoider"]
+position = Vector2( -1, -78 )
+shape = SubResource( 4 )

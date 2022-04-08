@@ -35,6 +35,7 @@ var steer_direction = 0.0
 var collision_movement = Vector2.ZERO
 
 onready var _engine_sound = $EngineSound
+onready var _collision_avoider : Area2D = $CollisionAvoider
 
 var _rand_pos_range = 100.0
 var _rand_offset = Vector2.ZERO
@@ -152,6 +153,18 @@ func _set_engine_noise():
 		_engine_sound.pitch_scale = min(2.5, 1 + velocity.length() / 400)
 
 
+func _avoid_collisions():
+	var collision_avoid = Vector2.ZERO
+
+	if _collision_avoider == null:
+		return collision_avoid
+
+	for body in _collision_avoider.get_overlapping_bodies():
+		collision_avoid += Vector2(global_position - body.global_position)
+
+	return collision_avoid
+
+
 func _baddy_mode(delta):
 	# velocity = Vector2.ZERO
 	var road = game_state.road
@@ -177,6 +190,13 @@ func _baddy_mode(delta):
 
 		var desired = (target + _rand_offset - global_position).normalized() * desired_vel
 		velocity += desired
+
+
+		var col = _avoid_collisions()
+		# if col.length() > 0:
+		# 	print("Got avoid stuff")
+		# velocity += (col.normalized() * desired_vel * 0.5)
+		velocity += col
 
 		var max_vel = max_baddy_velocity
 		if offset >= game_state.last_player_offset:
