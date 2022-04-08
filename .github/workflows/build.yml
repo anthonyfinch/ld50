@@ -2,7 +2,7 @@ name: Build + Publish
 
 on:
   push:
-    branches: main
+    branches: post-ld
 
 jobs:
   set-version:
@@ -58,6 +58,6 @@ jobs:
         env:
           BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
           CHANNEL: ${{ matrix.platform.name }}
-          ITCH_GAME: ld50
+          ITCH_GAME: the-bimbles-vs-the-inevitable-forces-of-tedium
           ITCH_USER: tfinch
           PACKAGE: build/${{ matrix.platform.name }}
